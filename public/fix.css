@@ -1,0 +1,352 @@
+/* =========================================================
+   NEXORA — Unified visual fix layer
+   Reconciles styles.css (dark), user.css (green-light) and
+   palette.css (blue-corporate) into one coherent light theme.
+   ========================================================= */
+
+/* --- Base reset ----------------------------------------- */
+[hidden] { display: none !important; }
+.hidden  { display: none !important; }
+#app aside nav { flex: 1; min-height: 0; overflow-y: auto; }
+
+/* --- Global light canvas --------------------------------- */
+html, body {
+  background: #F5F7FA !important;
+  color: #111827 !important;
+  font-family: 'DM Sans', 'Space Grotesk', system-ui, sans-serif !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* --- Auth screen ----------------------------------------- */
+#auth {
+  background: linear-gradient(135deg, #1a1150 0%, #2e1ea3 50%, #0f172a 100%) !important;
+  color: #f0f4ff !important;
+}
+#auth .auth-card {
+  background: #ffffff !important;
+  border: 1px solid #d1d9f0 !important;
+  box-shadow: 0 24px 80px rgba(14, 18, 60, 0.35) !important;
+  color: #111827 !important;
+}
+#auth h1 { color: #111827 !important; font-size: 30px !important; }
+#auth .logo { color: #4f46e5 !important; }
+#auth .logo span { color: #111827 !important; }
+#auth .eyebrow { color: #7c3aed !important; }
+#auth label { color: #374151 !important; }
+#auth input {
+  background: #fafafa !important;
+  border: 1px solid #c7d0e8 !important;
+  color: #111827 !important;
+}
+#auth button:not(.user-password-toggle):not(.user-register-toggle):not(.user-register-back) {
+  background: linear-gradient(100deg, #4f46e5, #7c3aed) !important;
+  color: #fff !important;
+}
+#auth .hint { color: #6b7280 !important; }
+#auth #authErr { color: #dc2626 !important; }
+
+/* Password / register toggles */
+#auth .user-password-toggle { background: transparent !important; color: #4f46e5 !important; }
+#auth .user-register-toggle { background: transparent !important; color: #4f46e5 !important; }
+#auth .user-admin-link { color: #4f46e5 !important; }
+
+/* --- Main app shell ------------------------------------- */
+#app { background: #F5F7FA !important; color: #111827 !important; min-height: 100vh; }
+
+/* Sidebar */
+#app aside { background: #0f172a !important; border-color: #1e293b !important; color: #e2e8f0 !important; }
+#app aside .logo { color: #a5b4fc !important; }
+#app aside .logo span { color: #f8fafc !important; }
+#app .workspace { background: #1e293b !important; border-color: #334155 !important; color: #f1f5f9 !important; }
+#app nav button { color: #94a3b8 !important; border: 0 !important; background: transparent !important; }
+#app nav button:hover { background: #1e293b !important; color: #f8fafc !important; }
+#app nav button.active { background: #4f46e5 !important; color: #fff !important; box-shadow: inset 3px 0 #a5b4fc !important; }
+#app .profile { border-color: #1e293b !important; }
+#app .profile small { color: #86efac !important; }
+#app .avatar { background: #e0e7ff !important; color: #4338ca !important; }
+
+/* Top header */
+#app header { background: #ffffff !important; border-bottom: 1px solid #e5e7eb !important; color: #111827 !important; }
+#app header button { color: #374151 !important; background: transparent !important; border: 0 !important; }
+#app .search input { background: #f9fafb !important; border: 1px solid #d1d5db !important; color: #111827 !important; }
+#app .search input::placeholder { color: #9ca3af !important; }
+#app .search kbd { background: #f3f4f6 !important; border-color: #d1d5db !important; color: #6b7280 !important; }
+#app .presence { color: #6b7280 !important; }
+#app .presence button { color: #111827 !important; background: transparent !important; border: 0 !important; }
+
+/* Main content area */
+#app main { background: #F5F7FA !important; }
+.page { color: #111827 !important; }
+.page.active { animation: page-fade-in 0.22s ease both; }
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Legacy card / panel classes (used by tasks, analytics, etc.) --- */
+.card, .panel {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  color: #111827 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.07) !important;
+}
+.card label { color: #6b7280 !important; font-size: 10px !important; letter-spacing: 0.6px !important; }
+.card h2 { color: #111827 !important; }
+.card p, .panel p { color: #6b7280 !important; }
+.card .good { color: #059669 !important; }
+
+/* Legacy top / page header */
+.top h1 { color: #111827 !important; font-size: 26px !important; margin: 6px 0 !important; }
+.top p { color: #6b7280 !important; margin: 0 !important; }
+.kicker { color: #4f46e5 !important; font-size: 10px !important; font-weight: 700 !important; letter-spacing: 1px !important; }
+
+/* Primary button */
+.primary {
+  background: linear-gradient(100deg, #4f46e5, #7c3aed) !important;
+  color: #fff !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  font-weight: 700 !important;
+}
+.primary:hover { filter: brightness(1.1) !important; }
+.secondary {
+  background: #f3f4f6 !important;
+  color: #374151 !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 7px !important;
+}
+
+/* Health badges */
+.health { background: #d1fae5 !important; color: #065f46 !important; border: 0 !important; }
+.health.risk { background: #fef3c7 !important; color: #92400e !important; }
+.health.critical { background: #fee2e2 !important; color: #991b1b !important; }
+
+/* Progress bars */
+.bar { background: #e5e7eb !important; }
+.bar i { background: linear-gradient(90deg, #4f46e5, #7c3aed) !important; }
+
+/* --- Task board ----------------------------------------- */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+.toolbar select {
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: #111827;
+  font-size: 12px;
+}
+.toolbar span { color: #6b7280; font-size: 11px; margin-left: auto; }
+
+/* Kanban board */
+.board { padding-bottom: 16px; }
+.column { background: #f3f4f6; border-radius: 8px; padding: 12px; }
+.column-head { color: #374151; font-weight: 700; font-size: 10px; letter-spacing: 0.5px; }
+.column-head span { background: #e5e7eb; color: #374151; border-radius: 9px; padding: 2px 7px; }
+
+/* Task cards */
+.task {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  color: #111827 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
+}
+.task:hover { border-color: #6366f1 !important; box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15) !important; }
+.task h3 { color: #111827 !important; font-size: 12px !important; }
+.task p { color: #6b7280 !important; font-size: 10px !important; }
+.badge { background: #fee2e2 !important; color: #991b1b !important; font-size: 9px !important; }
+.badge.medium { background: #fef3c7 !important; color: #92400e !important; }
+.badge.low { background: #d1fae5 !important; color: #065f46 !important; }
+.task-foot { color: #9ca3af !important; }
+
+/* --- Activity / notification rows ---------------------- */
+.activity-row { border-top: 1px solid #e5e7eb !important; padding: 13px 0 !important; }
+.activity-row:first-of-type { border-top: 0 !important; }
+.activity-row b { color: #111827 !important; font-size: 12px !important; }
+.activity-row small { color: #6b7280 !important; font-size: 10px !important; }
+
+/* Member rows */
+.member-row { border-top: 1px solid #e5e7eb !important; padding: 13px 0 !important; }
+.member-row b { color: #111827 !important; }
+.member-row p { color: #6b7280 !important; margin: 0 !important; }
+
+/* Symbol icons */
+.symbol { background: #e0e7ff !important; color: #4338ca !important; }
+
+/* --- Analytics page tweaks ----------------------------- */
+#analytics .card h2 { font-size: 28px !important; }
+#analytics .project-row { border-top: 1px solid #e5e7eb !important; }
+#analytics .project-row b { color: #111827 !important; font-size: 12px !important; }
+#analytics .project-row small { color: #6b7280 !important; }
+
+/* --- Settings / notifications / files pages ------------ */
+#settings .panel h2 { color: #111827 !important; margin-bottom: 5px !important; }
+#settings .panel p { color: #6b7280 !important; }
+.empty { color: #6b7280 !important; }
+.file-row { border-top: 1px solid #e5e7eb !important; padding: 13px 0 !important; }
+.file-row:first-of-type { border-top: 0 !important; }
+.file-row b { color: #111827 !important; }
+.file-row small { color: #6b7280 !important; }
+.file-row a { color: #4f46e5 !important; text-decoration: none !important; font-weight: 600 !important; }
+.file-row a:hover { text-decoration: underline !important; }
+
+/* --- Modals --------------------------------------------- */
+.modal > .dialog {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  color: #111827 !important;
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.18) !important;
+}
+.modal h2 { color: #111827 !important; }
+.close { background: #f3f4f6 !important; color: #374151 !important; border: 1px solid #e5e7eb !important; border-radius: 5px !important; }
+.formgrid label { color: #6b7280 !important; font-size: 11px !important; }
+.formgrid input, .formgrid textarea, .formgrid select {
+  background: #f9fafb !important;
+  border: 1px solid #d1d5db !important;
+  color: #111827 !important;
+  border-radius: 6px !important;
+}
+.comment { border-top: 1px solid #e5e7eb !important; }
+.comment b { color: #111827 !important; }
+.comment small { color: #9ca3af !important; }
+.comment div { color: #374151 !important; }
+.conflict { background: #fff7ed !important; border: 1px solid #fb923c !important; color: #9a3412 !important; }
+.compare div { background: #f9fafb !important; color: #374151 !important; border-radius: 6px !important; }
+.compare b { color: #111827 !important; }
+
+/* --- Toast -------------------------------------------- */
+.toast { background: #111827 !important; border: 1px solid #374151 !important; color: #f9fafb !important; }
+
+/* --- Palette / search ---------------------------------- */
+.palette-list button { background: #ffffff !important; color: #111827 !important; border-bottom: 1px solid #e5e7eb !important; }
+.palette-list button:hover { background: #f3f4f6 !important; }
+
+/* --- Calendar legacy page style ----------------------- */
+.calendar { display: grid !important; grid-template-columns: repeat(7, 1fr) !important; gap: 6px !important; }
+.day { background: #fff !important; border: 1px solid #e5e7eb !important; border-radius: 6px !important; color: #374151 !important; }
+.deadline { background: #e0e7ff !important; color: #3730a3 !important; }
+
+/* --- Admin panel tweaks -------------------------------- */
+.panel-loading { padding: 24px; color: #6b7280; }
+.panel-feedback { padding: 12px 16px; border-left: 3px solid #4f46e5; background: #eff6ff; color: #1e40af; }
+.panel-feedback.error { border-color: #dc2626; background: #fef2f2; color: #991b1b; }
+.account-columns { align-items: start; }
+.admin-create, .admin-directory { margin: 18px 0; }
+.admin-create-form { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; }
+.admin-create-form .primary { margin: 0; }
+.admin-directory { overflow: hidden; }
+.admin-directory-head { display: flex; justify-content: space-between; align-items: center; }
+.admin-directory-head h2, .admin-directory-head p { margin: 0; }
+.admin-table-wrap { overflow: auto; }
+.admin-table-wrap table { width: 100%; min-width: 680px; border-collapse: collapse; text-align: left; }
+.admin-table-wrap th, .admin-table-wrap td { padding: 12px 10px; border-bottom: 1px solid #e5e7eb; vertical-align: middle; }
+.admin-table-wrap th { font-size: 11px; text-transform: uppercase; color: #6b7280; }
+.admin-table-wrap td small { display: block; margin-top: 4px; color: #6b7280; }
+.admin-table-wrap input, .admin-table-wrap select { min-width: 120px; margin: 0; background: #fff; color: #111827; border: 1px solid #d1d5db; border-radius: 5px; padding: 8px; }
+.admin-actions { white-space: nowrap; }
+.admin-actions button { width: auto; margin: 0 5px 0 0; padding: 8px 10px; }
+.admin-actions .danger-action { color: #dc2626; border-color: #fca5a5; }
+
+/* --- Dashboard component palette overrides ------------- */
+.dashboard-kicker, .user-kicker { color: #4f46e5 !important; }
+.dashboard-link { color: #4338ca !important; }
+.dashboard-hero { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%) !important; }
+.dashboard-hero h1 em { color: #a5b4fc !important; }
+.dashboard-hero .dashboard-kicker { color: #c4b5fd !important; }
+.dashboard-create { background: linear-gradient(100deg, #4f46e5, #7c3aed) !important; color: #fff !important; }
+.dashboard-create:hover { filter: brightness(1.1) !important; }
+.pulse-module { background: #1e293b !important; border-color: #334155 !important; }
+.pulse-ring { background: conic-gradient(#818cf8 var(--pulse), #334155 var(--pulse)) !important; }
+.pulse-ring::before { background: #1e293b !important; }
+.pulse-ring small, .pulse-caption small { color: #cbd5e1 !important; }
+.pulse-caption > i { background: #818cf8 !important; box-shadow: 0 0 0 4px #818cf822 !important; }
+.kpi-icon.blue { background: #dbeafe !important; color: #1d4ed8 !important; }
+.kpi-icon.coral { background: #fee2e2 !important; color: #b91c1c !important; }
+.kpi-icon.green { background: #d1fae5 !important; color: #047857 !important; }
+.kpi-icon.gold { background: #fef3c7 !important; color: #92400e !important; }
+.project-pulse-bar u, .user-project-progress i { background: #4f46e5 !important; }
+.project-health { background: #d1fae5 !important; color: #047857 !important; }
+.project-health.late { background: #fef3c7 !important; color: #92400e !important; }
+.workload-meter i { background: #6366f1 !important; }
+.project-detail-progress b { color: #4f46e5 !important; }
+.project-detail-progress > i { background: #e5e7eb !important; }
+.project-detail-progress u { background: #4f46e5 !important; text-decoration: none !important; }
+.task-status-dot { background: #f59e0b !important; }
+.task-status-dot.done { background: #10b981 !important; }
+
+/* User account panel */
+.user-profile-banner { background: linear-gradient(135deg, #0f172a, #1e1b4b) !important; }
+.user-profile-copy .user-kicker { color: #a5b4fc !important; }
+.user-large-avatar { background: #6366f1 !important; color: #fff !important; }
+.user-access-chip { border-color: #475569 !important; color: #e2e8f0 !important; }
+.user-metric { border-top-color: #6366f1 !important; }
+.user-metric.metric-accent { border-top-color: #f43f5e !important; }
+.user-save-button { background: linear-gradient(100deg, #4f46e5, #7c3aed) !important; }
+.user-save-button:hover { filter: brightness(1.1) !important; }
+.user-register-submit { background: linear-gradient(100deg, #4f46e5, #7c3aed) !important; color: #fff !important; }
+.user-register-kicker { color: #7c3aed !important; }
+.user-password-toggle, .user-admin-link, .user-register-toggle { color: #4f46e5 !important; }
+.user-feedback { background: #eff6ff !important; border-color: #6366f1 !important; color: #1e40af !important; }
+.user-feedback.error { background: #fef2f2 !important; border-color: #dc2626 !important; color: #991b1b !important; }
+.user-form input:focus { border-color: #6366f1 !important; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18) !important; }
+.team-tools select, .team-search input { border-color: #e5e7eb !important; background: #fff !important; color: #111827 !important; }
+.team-avatar { background: #e0e7ff !important; color: #3730a3 !important; }
+.team-avatar.large { background: #e0e7ff !important; color: #3730a3 !important; }
+.workload-avatar { background: #e0e7ff !important; color: #3730a3 !important; }
+.month-event { background: #dbeafe !important; color: #1d4ed8 !important; }
+.month-event.project { background: #d1fae5 !important; color: #047857 !important; }
+.month-day.today { background: #eff6ff !important; }
+.month-day.today .month-day-number { background: #4f46e5 !important; color: #fff !important; }
+.calendar-controls button { background: #fff !important; border-color: #e5e7eb !important; color: #374151 !important; }
+.calendar-controls button:hover { border-color: #6366f1 !important; color: #4f46e5 !important; }
+.user-file-search input, .user-file-controls select { background: #fff !important; border-color: #e5e7eb !important; color: #111827 !important; }
+.activity-filter select { background: #fff !important; border-color: #e5e7eb !important; color: #111827 !important; }
+
+/* Admin palette */
+.admin-rail { background: #0f172a !important; }
+.rail-brand span { color: #a5b4fc !important; }
+.admin-nav button.active { background: #4f46e5 !important; color: #fff !important; }
+.login-mark { background: #0f172a !important; }
+.login-mark span { color: #a5b4fc !important; }
+.button-primary { background: #4f46e5 !important; color: #fff !important; }
+.button-primary:hover { background: #4338ca !important; }
+.button-light { background: #e0e7ff !important; color: #3730a3 !important; }
+.access-label { background: #dbeafe !important; color: #1d4ed8 !important; }
+.access-label.admin { background: #ede9fe !important; color: #6d28d9 !important; }
+.project-progress span { background: #4f46e5 !important; }
+.distribution-track i { background: #4f46e5 !important; }
+.confirm-actions .confirm-danger { background: #dc2626 !important; border-color: #dc2626 !important; }
+
+/* Search dialog */
+.global-search-dialog h2 { color: #111827 !important; }
+.search-group h3 { color: #4f46e5 !important; }
+.search-group button { background: #fff !important; color: #111827 !important; }
+.search-group button:hover { background: #f3f4f6 !important; }
+.search-group button b { color: #111827 !important; }
+.search-group button small { color: #6b7280 !important; }
+
+/* --- Responsive ---------------------------------------- */
+@media (max-width: 760px) {
+  .admin-create-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .account-columns { grid-template-columns: 1fr; }
+  .admin-table-wrap table { min-width: 620px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

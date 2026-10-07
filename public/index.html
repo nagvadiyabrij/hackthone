@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="NEXORA — A living, real-time collaborative workspace for teams. Manage tasks, projects, files and people without collisions.">
+  <title>NEXORA — Living Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/nexora.css">
+</head>
+<body>
+
+<!-- ── Auth Screen ─────────────────────────────── -->
+<div id="auth" class="auth-screen">
+  <div class="auth-glow"></div>
+  <div class="auth-card">
+    <div class="auth-logo">N<span>EXORA</span></div>
+    <p class="auth-eyebrow">COLLABORATE WITHOUT COLLISIONS</p>
+    <h1 class="auth-headline">Your team. Your projects.<br><em>One living workspace.</em></h1>
+
+    <form id="login" class="auth-form" novalidate>
+      <div class="field-group">
+        <label class="field-label" for="loginEmail">Email address</label>
+        <input id="loginEmail" class="field-input" name="email" type="email"
+               value="alex@nexora.local" autocomplete="email" required
+               placeholder="you@company.com">
+        <span class="field-error" id="emailError"></span>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="loginPassword">Password</label>
+        <div class="field-password-wrap">
+          <input id="loginPassword" class="field-input" name="password" type="password"
+                 value="NexoraDemo26!" autocomplete="current-password" required
+                 placeholder="Your password" minlength="6">
+          <button type="button" class="field-pw-toggle" id="pwToggle" aria-label="Show password">Show</button>
+        </div>
+        <span class="field-error" id="passwordError"></span>
+      </div>
+      <p id="authErr" class="auth-server-error" role="alert"></p>
+      <button class="btn-auth" type="submit" id="loginBtn">
+        <span id="loginBtnLabel">Enter Nexora</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p class="auth-hint">Demo: alex@nexora.local / NexoraDemo26!</p>
+      <div class="auth-divider"><span>or</span></div>
+      <button type="button" class="btn-auth-secondary" id="showRegister">Create a member account</button>
+      <a href="/admin.html" class="auth-admin-link">Administrator sign-in →</a>
+    </form>
+
+    <!-- Register form (hidden by default) -->
+    <form id="registerForm" class="auth-form" hidden novalidate>
+      <p class="auth-eyebrow" style="margin-top:0">NEW TO NEXORA</p>
+      <h2 style="margin:0 0 20px;font-size:20px">Create your account</h2>
+      <div class="field-group">
+        <label class="field-label" for="regName">Full name</label>
+        <input id="regName" class="field-input" name="name" autocomplete="name" minlength="2" required placeholder="Your full name">
+        <span class="field-error" id="regNameError"></span>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="regEmail">Email address</label>
+        <input id="regEmail" class="field-input" name="email" type="email" autocomplete="email" required placeholder="you@company.com">
+        <span class="field-error" id="regEmailError"></span>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="regPassword">Password</label>
+        <input id="regPassword" class="field-input" name="password" type="password" autocomplete="new-password" minlength="8" required placeholder="Min. 8 characters">
+        <span class="field-error" id="regPasswordError"></span>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="regConfirm">Confirm password</label>
+        <input id="regConfirm" class="field-input" name="confirmPassword" type="password" autocomplete="new-password" minlength="8" required placeholder="Repeat password">
+        <span class="field-error" id="regConfirmError"></span>
+      </div>
+      <p class="field-error" id="regServerError" role="alert"></p>
+      <button class="btn-auth" type="submit" id="registerBtn">Create account</button>
+      <button type="button" class="btn-auth-secondary" id="showLogin">← Back to sign in</button>
+    </form>
+  </div>
+</div>
+
+<!-- ── App Shell ───────────────────────────────── -->
+<div id="app" hidden>
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sb-logo">N<span>EXORA</span></div>
+    <div class="sb-workspace">
+      <span class="sb-ws-dot"></span>
+      <span id="wsName">Nexora Labs</span>
+      <span class="sb-ws-badge">LIVE</span>
+    </div>
+    <nav id="mainNav">
+      <button class="nav-btn active" data-page="home">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 6.5L8 2l6 4.5V14a1 1 0 01-1 1H3a1 1 0 01-1-1V6.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-btn" data-page="tasks">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Task Board</span>
+      </button>
+      <button class="nav-btn" data-page="projects">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Projects</span>
+      </button>
+      <button class="nav-btn" data-page="team">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6" cy="5" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M1 13c0-2.21 2.24-4 5-4s5 1.79 5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="5" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M14 12.5c0-1.5-1-2.5-2-2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Team</span>
+      </button>
+      <button class="nav-btn" data-page="calendar">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M5 2v2M11 2v2M2 7h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Calendar</span>
+      </button>
+      <button class="nav-btn" data-page="files">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9 2H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V6L9 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 2v4h4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span>Files</span>
+      </button>
+      <button class="nav-btn" data-page="activity">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h2l2-5 3 10 2-6 1 1h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Activity</span>
+      </button>
+      <button class="nav-btn" data-page="analytics">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 13h2V9H2v4zM7 13h2V5H7v8zM12 13h2V2h-2v11z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span>Analytics</span>
+      </button>
+      <button class="nav-btn" data-page="settings">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.22 3.22l1.42 1.42M11.36 11.36l1.42 1.42M3.22 12.78l1.42-1.42M11.36 4.64l1.42-1.42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+    <div class="sb-profile">
+      <span class="sb-avatar" id="meAvatar"></span>
+      <div class="sb-profile-info">
+        <b id="meName"></b>
+        <small class="sb-online">● Online now</small>
+      </div>
+      <button class="sb-logout" id="logout" title="Sign out">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M5 13H2V2h3M10 10l3-3-3-3M13 7H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="app-main">
+    <header class="app-header">
+      <button class="header-menu" id="menu" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div class="header-search">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input id="search" placeholder="Search tasks, projects, people… (Ctrl+K)">
+      </div>
+      <div class="header-right">
+        <div class="header-live">
+          <span class="live-dot"></span>
+          <span class="live-label">Live sync</span>
+        </div>
+        <button class="header-notif" data-page="notifications" id="notifBtn">
+          <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 2a5 5 0 015 5v3l1.5 2H2L3.5 10V7a5 5 0 015-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6.5 13a2 2 0 004 0" stroke="currentColor" stroke-width="1.5"/></svg>
+          <b id="unread" class="notif-badge">0</b>
+        </button>
+      </div>
+    </header>
+
+    <div class="page-area">
+      <section id="home"          class="page active"></section>
+      <section id="projects"      class="page"></section>
+      <section id="tasks"         class="page"></section>
+      <section id="team"          class="page"></section>
+      <section id="calendar"      class="page"></section>
+      <section id="files"         class="page"></section>
+      <section id="activity"      class="page"></section>
+      <section id="analytics"     class="page"></section>
+      <section id="notifications" class="page"></section>
+      <section id="settings"      class="page"></section>
+    </div>
+  </div>
+</div>
+
+<!-- Modals -->
+<div class="modal-backdrop hidden" id="taskModal"></div>
+<div class="modal-backdrop hidden" id="projectModal"></div>
+<div class="modal-backdrop hidden" id="palette"></div>
+
+<!-- Toasts -->
+<div id="toasts" aria-live="polite"></div>
+
+<script src="/nexora-app.js"></script>
+</body>
+</html>

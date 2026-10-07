@@ -1,0 +1,1 @@
+CREATE TABLE users (id UUID PRIMARY KEY, name TEXT NOT NULL CHECK(length(name)>1), email TEXT UNIQUE NOT NULL, avatar_url TEXT, role TEXT NOT NULL DEFAULT 'Member', password_hash TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now(), updated_at TIMESTAMPTZ NOT NULL DEFAULT now());

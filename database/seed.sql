@@ -1,0 +1,2 @@
+-- Seed identities/projects/tasks are created by the local development adapter on first run.
+-- For PostgreSQL production, run migrations then insert Nexora Labs and its members through the registration/admin service so passwords are never present in SQL.

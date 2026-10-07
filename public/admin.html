@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#18392f">
+  <title>NEXORA Control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin.css">
+  <link rel="stylesheet" href="/palette.css">
+</head>
+<body>
+  <main id="adminLogin" class="login-shell">
+    <section class="login-story">
+      <a class="admin-wordmark" href="/" aria-label="NEXORA user workspace">NEXORA <span>CONTROL</span></a>
+      <p class="eyebrow">WORKSPACE OPERATIONS</p>
+      <h1>Good systems<br>start with good access.</h1>
+      <p class="login-intro">Manage the people behind the work. One clear place for accounts, permissions, and workspace health.</p>
+      <div class="login-stamp"><span>01</span><div><b>People first</b><small>Simple account administration</small></div></div>
+    </section>
+    <form id="adminLoginForm" class="login-form">
+      <div class="login-mark">N<span>/</span></div>
+      <p class="eyebrow">ADMINISTRATOR SIGN IN</p>
+      <h2>Enter Control</h2>
+      <p class="form-copy">Use an administrator account to continue.</p>
+      <label>Email<input name="email" type="email" autocomplete="username" value="alex@nexora.local" required></label>
+      <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+      <p id="adminLoginError" class="form-message" role="status"></p>
+      <button class="button button-primary" type="submit">Sign in to Control <span aria-hidden="true">→</span></button>
+      <a id="workspaceLink" class="workspace-link" href="/">Sign in to the user workspace</a>
+    </form>
+  </main>
+
+  <div id="adminConsole" class="admin-shell" hidden>
+    <aside class="admin-rail">
+      <a class="rail-brand" href="/admin.html">N<span>EXORA</span><small>CONTROL</small></a>
+      <div class="rail-section-label">WORKSPACE</div>
+      <nav class="admin-nav" aria-label="Administration">
+        <button class="active" data-view="overview"><span class="nav-icon">◫</span>Overview</button>
+        <button data-view="accounts"><span class="nav-icon">♙</span>Users</button>
+        <button data-view="roles"><span class="nav-icon">◇</span>Roles & permissions</button>
+        <button data-view="projects"><span class="nav-icon">▣</span>Projects</button>
+        <button data-view="tasks"><span class="nav-icon">✓</span>Tasks</button>
+        <button data-view="files"><span class="nav-icon">⇧</span>Files</button>
+        <button data-view="activity"><span class="nav-icon">⌁</span>Activity logs</button>
+        <button data-view="analytics"><span class="nav-icon">◔</span>Analytics</button>
+        <button data-view="notifications"><span class="nav-icon">♧</span>Notifications</button>
+        <button data-view="settings"><span class="nav-icon">⚙</span>Workspace settings</button>
+        <button data-view="security"><span class="nav-icon">⌑</span>Security</button>
+        <button data-view="health"><span class="nav-icon">●</span>System health</button>
+      </nav>
+      <div class="rail-bottom">
+        <div class="admin-identity"><span id="adminAvatar" class="identity-avatar">N</span><span><b id="adminName">Administrator</b><small id="adminRole">Admin</small></span></div>
+        <button id="adminLogout" class="logout-button">Sign out <span aria-hidden="true">↗</span></button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div><p class="breadcrumb">NEXORA / CONTROL</p><span class="topbar-title">Workspace administration</span></div>
+        <div class="topbar-actions"><span class="secure-state"><i></i> Admin session</span><button id="topCreate" class="button button-dark">+ Create account</button><button id="topLogout" class="logout-top">Sign out</button></div>
+      </header>
+      <div id="adminFeedback" class="admin-feedback" role="status" hidden></div>
+
+      <section id="overviewView" class="admin-view">
+        <div class="view-heading"><div><p class="eyebrow">CONTROL ROOM / OVERVIEW</p><h1>Workspace operations,<br>made clear.</h1><p>Manage the people and permissions that keep work moving.</p></div><div class="date-chip"><span class="date-dot"></span> Workspace live</div></div>
+        <div class="metric-grid">
+          <article class="metric metric-green"><span>Total accounts</span><strong id="metricTotal">0</strong><small>People in this workspace</small></article>
+          <article class="metric metric-lime"><span>Active users</span><strong id="metricActive">0</strong><small>Accounts that can sign in</small></article>
+          <article class="metric metric-lime"><span>Administrators</span><strong id="metricAdmins">0</strong><small>Elevated access</small></article>
+          <article class="metric metric-coral"><span>Workspace members</span><strong id="metricMembers">0</strong><small>Standard access</small></article>
+          <article class="metric metric-green"><span>Projects</span><strong id="metricProjects">0</strong><small>Stored in this workspace</small></article>
+          <article class="metric metric-lime"><span>Tasks</span><strong id="metricTasks">0</strong><small><b id="metricCompleted">0</b> completed</small></article>
+          <article class="metric metric-coral"><span>Overdue work</span><strong id="metricOverdue">0</strong><small>Open tasks past due</small></article>
+          <article class="metric metric-green"><span>Files</span><strong id="metricFiles">0</strong><small>Workspace uploads</small></article>
+        </div>
+        <div class="overview-grid">
+          <section class="overview-callout"><div class="callout-copy"><p class="eyebrow">ACCESS, MADE LEGIBLE</p><h2>Give the right people<br>the right level of access.</h2><p>Create a member account or review permissions before they become a blocker.</p><button class="button button-light" data-open-accounts>Manage people <span aria-hidden="true">→</span></button></div><div class="callout-index">N<span>°</span>01</div></section>
+          <section class="roster-panel"><div class="panel-heading"><div><p class="eyebrow">DIRECTORY</p><h2>Workspace roster</h2></div><button class="text-button" data-open-accounts>View all <span aria-hidden="true">→</span></button></div><div id="overviewRoster" class="overview-roster"></div></section>
+          <section class="roster-panel"><div class="panel-heading"><div><p class="eyebrow">LATEST EVENTS</p><h2>Workspace activity</h2></div><button class="text-button" data-view-link="activity">Activity log <span aria-hidden="true">→</span></button></div><div id="overviewActivity" class="overview-roster"></div></section>
+        </div>
+      </section>
+      <section id="utilityView" class="admin-view" hidden></section>
+
+      <section id="accountsView" class="admin-view" hidden>
+        <div class="view-heading compact-heading"><div><p class="eyebrow">CONTROL ROOM / PEOPLE</p><h1>People & access</h1><p>Create accounts and keep permissions up to date.</p></div><span id="accountCount" class="count-chip">0 accounts</span></div>
+        <div class="account-layout">
+          <section class="create-panel"><div class="panel-heading"><div><p class="eyebrow">NEW WORKSPACE MEMBER</p><h2>Create an account</h2></div><span class="create-symbol">+</span></div><p class="panel-description">Set the account details and access level. The new user can sign in right away.</p>
+            <form id="createAccountForm" class="create-form">
+              <label>Full name<input name="name" autocomplete="off" minlength="2" placeholder="e.g. Jordan Lee" required></label>
+              <label>Work email<input name="email" type="email" autocomplete="off" placeholder="name@company.com" required></label>
+              <label>Job title<input name="role" placeholder="e.g. Product designer" value="Member"></label>
+              <label>Access level<select name="access"><option value="user">Workspace member</option><option value="admin">Administrator</option></select></label>
+              <label class="full-field">Temporary password<input name="password" type="password" minlength="8" autocomplete="new-password" placeholder="At least 8 characters" required></label>
+              <button class="button button-primary full-field" type="submit">Create workspace account <span aria-hidden="true">→</span></button>
+            </form>
+          </section>
+          <section class="directory-panel"><div class="panel-heading directory-heading"><div><p class="eyebrow">ACCESS DIRECTORY</p><h2>Workspace accounts</h2></div><span id="directoryTotal" class="directory-total">0</span></div>
+            <div class="directory-tools"><label class="search-field"><span aria-hidden="true">⌕</span><input id="accountSearch" type="search" placeholder="Find a person or email" aria-label="Find a person or email"></label><select id="accessFilter" aria-label="Filter by access"><option value="all">All access</option><option value="admin">Administrators</option><option value="user">Members</option></select></div>
+            <div class="directory-scroll"><table class="account-table"><thead><tr><th>Person</th><th>Job title</th><th>Access</th><th>Status</th><th>Manage</th></tr></thead><tbody id="accountRows"></tbody></table></div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+  <dialog id="adminConfirm" class="confirm-dialog"><form method="dialog"><span class="eyebrow">CONFIRM ACTION</span><h2 id="confirmTitle">Remove account?</h2><p id="confirmMessage"></p><div class="confirm-actions"><button class="confirm-cancel" value="cancel">Cancel</button><button id="confirmAction" class="confirm-danger" value="confirm">Remove account</button></div></form></dialog>
+  <dialog id="passwordResetDialog" class="confirm-dialog"><form id="passwordResetForm" method="dialog"><span class="eyebrow">ACCOUNT SECURITY</span><h2>Reset account password</h2><p>Set a temporary password for <b id="resetAccountName"></b>. Their existing sessions will be signed out.</p><label class="reset-password-label">Temporary password<input name="newPassword" type="password" minlength="8" autocomplete="new-password" required></label><p id="passwordResetError" class="form-message" role="alert"></p><div class="confirm-actions"><button id="cancelPasswordReset" class="confirm-cancel" type="button">Cancel</button><button class="confirm-danger" type="submit">Reset password</button></div></form></dialog>
+  <script src="/admin.js"></script>
+</body>
+</html>

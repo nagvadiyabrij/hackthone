@@ -1,0 +1,2 @@
+CREATE TABLE workspaces (id UUID PRIMARY KEY, name TEXT NOT NULL, owner_id UUID NOT NULL REFERENCES users(id), created_at TIMESTAMPTZ NOT NULL DEFAULT now(), updated_at TIMESTAMPTZ NOT NULL DEFAULT now());
+CREATE TABLE workspace_members (workspace_id UUID REFERENCES workspaces(id) ON DELETE CASCADE, user_id UUID REFERENCES users(id) ON DELETE CASCADE, role TEXT NOT NULL DEFAULT 'member', created_at TIMESTAMPTZ NOT NULL DEFAULT now(), PRIMARY KEY(workspace_id,user_id));
