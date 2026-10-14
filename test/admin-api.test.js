@@ -55,6 +55,13 @@ test('account and admin routes enforce access and support user management', { ti
   }
   assert.equal(ready, true, `temporary server did not start: ${output}`);
 
+  const health = await fetch(`${base}/healthz`);
+  assert.equal(health.status, 200);
+  const healthBody = await health.json();
+  assert.equal(healthBody.status, 'ok');
+  assert.equal(healthBody.storage, 'local-json');
+  assert.equal(Number.isNaN(Date.parse(healthBody.time)), false);
+
   async function call(url, { method = 'GET', body, cookie } = {}) {
     const response = await fetch(`${base}${url}`, {
       method,

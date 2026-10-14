@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NEXORA API Explorer</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,sans-serif;background:#0d1117;color:#e6edf3}body{margin:0;padding:32px;max-width:920px;margin:auto}h1{margin:0 0 8px}p{color:#8b949e}.notice,section{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:20px;margin:18px 0}.notice{border-color:#388bfd}code{background:#21262d;padding:3px 6px;border-radius:4px}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px;border-bottom:1px solid #30363d}th{color:#8b949e}form{display:grid;gap:10px;max-width:420px}input,button{font:inherit;padding:10px;border-radius:6px;border:1px solid #30363d;background:#0d1117;color:#e6edf3}button{background:#238636;border:0;font-weight:700;cursor:pointer}pre{white-space:pre-wrap;overflow:auto;background:#010409;padding:14px;border-radius:6px;min-height:40px}a{color:#58a6ff}.table-wrap{overflow-x:auto}@media(max-width:600px){body{padding:16px}h1{font-size:25px}.notice,section{padding:16px;margin:14px 0}table{min-width:580px}th,td{padding:9px;font-size:13px}input,button{min-height:44px}pre{font-size:12px;padding:12px}}
+  </style>
+</head>
+<body>
+  <h1>NEXORA backend API</h1>
+  <p>Local base URL: <code>http://localhost:3000</code></p>
+  <div class="notice">This local development server uses <strong>HTTP</strong>. HTTPS requires a domain and TLS certificate, so it is not enabled locally.</div>
+
+  <section>
+    <h2>Available routes</h2>
+    <div class="table-wrap"><table><thead><tr><th>Method</th><th>Route</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td>POST</td><td><code>/api/auth/login</code></td><td>Start a session</td></tr>
+      <tr><td>POST</td><td><code>/api/auth/register</code></td><td>Create an account</td></tr>
+      <tr><td>POST</td><td><code>/api/auth/logout</code></td><td>End the current session</td></tr>
+      <tr><td>GET</td><td><code>/api/me</code></td><td>Current user and workspace state</td></tr>
+      <tr><td>GET</td><td><code>/api/events</code></td><td>Realtime event stream</td></tr>
+      <tr><td>POST</td><td><code>/api/projects</code></td><td>Create a project</td></tr>
+      <tr><td>POST</td><td><code>/api/tasks</code></td><td>Create a task</td></tr>
+      <tr><td>PATCH / DELETE</td><td><code>/api/tasks/:id</code></td><td>Update or delete a task</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section>
+    <h2>POST: Sign in</h2>
+    <form id="login"><input name="email" type="email" value="alex@nexora.local" required><input name="password" type="password" value="NexoraDemo26!" required><button>POST /api/auth/login</button></form>
+  </section>
+  <section>
+    <h2>GET: Current session</h2>
+    <button id="me">GET /api/me</button>
+  </section>
+  <section><h2>Response</h2><pre id="result">Choose an API request above.</pre></section>
+  <p><a href="/">Open application</a></p>
+  <script>
+    const result=document.querySelector('#result');
+    async function request(url,options){try{const response=await fetch(url,options);const data=await response.json();result.textContent=`HTTP ${response.status}\n\n${JSON.stringify(data,null,2)}`}catch(error){result.textContent=error.message}}
+    document.querySelector('#login').addEventListener('submit',event=>{event.preventDefault();request('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(event.target)))})});
+    document.querySelector('#me').addEventListener('click',()=>request('/api/me'));
+  </script>
+</body>
+</html>

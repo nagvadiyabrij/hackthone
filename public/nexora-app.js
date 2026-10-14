@@ -96,8 +96,7 @@ $('#login').addEventListener('submit', async e => {
   $('#authErr').textContent = '';
   try {
     await api('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
-    $('#auth').hidden = true; $('#app').hidden = false;
-    await load(); startRealtime();
+    await enterWorkspace();
   } catch (err) {
     $('#authErr').textContent = err.message;
   } finally {
@@ -125,8 +124,7 @@ $('#registerForm').addEventListener('submit', async e => {
   btn.disabled = true; btn.textContent = 'Creating account…';
   try {
     await api('/api/auth/register', { method: 'POST', body: JSON.stringify({ name, email, password, confirmPassword: confirm }) });
-    $('#auth').hidden = true; $('#app').hidden = false;
-    await load(); startRealtime();
+    await enterWorkspace();
   } catch (err) {
     $('#regServerError').textContent = err.message;
   } finally {
@@ -135,18 +133,33 @@ $('#registerForm').addEventListener('submit', async e => {
 });
 
 /* ── Navigation ─────────────────────────────────────────────── */
-function show(page) {
-  $$('.page').forEach(s => s.classList.toggle('active', s.id === page));
-  $$('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.page === page));
+const pageIds = new Set(['home', 'projects', 'tasks', 'team', 'calendar', 'files', 'activity', 'analytics', 'notifications', 'settings', 'account']);
+
+function currentPage() {
+  const requested = window.location.hash.replace(/^#/, '');
+  return pageIds.has(requested) ? requested : 'home';
+}
+
+function show(page, updateUrl = false) {
+  const target = pageIds.has(page) ? page : 'home';
+  if (updateUrl && window.location.hash !== `#${target}`) {
+    window.location.hash = target;
+    return;
+  }
+  $$('.page').forEach(s => s.classList.toggle('active', s.id === target));
+  $$('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.page === target));
   $('#sidebar').classList.remove('open');
   const renderers = { home, projects, tasks, team, calendar, files, activity, analytics, notifications, settings, account };
-  renderers[page]?.();
+  renderers[target]?.();
 }
 
 $('#menu').addEventListener('click', () => $('#sidebar').classList.toggle('open'));
-$$('.nav-btn').forEach(b => b.addEventListener('click', () => show(b.dataset.page)));
+$$('.nav-btn').forEach(b => b.addEventListener('click', () => show(b.dataset.page, true)));
 $('#logout').addEventListener('click', logout);
-$('#notifBtn').addEventListener('click', () => show('notifications'));
+$('#notifBtn').addEventListener('click', () => show('notifications', true));
+window.addEventListener('hashchange', () => {
+  if (me) show(currentPage());
+});
 document.addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
     e.preventDefault(); $('#search').focus();
@@ -165,8 +178,19 @@ async function load() {
   $('#unread').textContent = cnt > 99 ? '99+' : cnt;
   // Workspace name
   if (S.workspace?.name) $('#wsName').textContent = S.workspace.name;
-  const cur = $('.page.active')?.id || 'home';
+  const cur = currentPage();
   show(cur);
+}
+
+async function enterWorkspace() {
+  await load();
+  if (me.access === 'admin') {
+    window.location.assign('/admin.html');
+    return;
+  }
+  $('#auth').hidden = true;
+  $('#app').hidden = false;
+  startRealtime();
 }
 
 async function logout() {
@@ -199,8 +223,8 @@ function startRealtime() {
       if (d.user.access === 'admin' && window.location.pathname !== '/admin.html') {
         window.location.replace('/admin.html'); return;
       }
-      $('#auth').hidden = true; $('#app').hidden = false;
       me = d.user; S = d.state;
+      $('#auth').hidden = true; $('#app').hidden = false;
       await load(); startRealtime();
     }
   } catch { /* not logged in */ }
@@ -364,7 +388,7 @@ function home() {
     </div>
   `;
   $('#createTaskBtn')?.addEventListener('click', () => openTaskForm());
-  $$('#home .btn-show-page').forEach(b => b.addEventListener('click', () => show(b.dataset.go)));
+  $$('#home .btn-show-page').forEach(b => b.addEventListener('click', () => show(b.dataset.go, true)));
   $$('#home [data-open-task]').forEach(b => b.addEventListener('click', () => openTaskDrawer(b.dataset.openTask)));
 }
 

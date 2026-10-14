@@ -1488,7 +1488,32 @@ a:hover { text-decoration: underline; }
   .hero-title { font-size: 28px; }
 }
 @media (max-width: 600px) {
+  .auth-screen { padding: 16px; align-items: start; }
+  .auth-card { margin: 16px 0; padding: 28px 20px; }
+  .auth-eyebrow { margin-top: 22px; }
+  .auth-headline { font-size: 23px; margin-bottom: 22px; }
+  .app-header { height: 54px; gap: 8px; padding: 0 14px; }
+  .header-search { min-width: 0; height: 34px; padding: 0 10px; }
+  .header-search input { min-width: 0; font-size: 12px; }
+  .header-live { display: none; }
+  .header-right { gap: 4px; }
+  .page.active { padding: 16px 12px; }
   .ph { flex-direction: column; align-items: flex-start; }
+  .ph h1 { font-size: 24px; }
+  .ph .btn { width: 100%; justify-content: center; }
+  .hero-banner { padding: 24px 20px; gap: 20px; }
+  .hero-title { font-size: 26px; }
+  .hero-desc { font-size: 12px; }
+  .grid-4 { grid-template-columns: 1fr; }
+  .panel { padding: 16px; }
+  .panel-header { align-items: flex-start; gap: 10px; }
+  .row { align-items: flex-start; }
+  .dialog { padding: 22px 16px; }
+  .dialog-actions { flex-direction: column-reverse; }
+  .dialog-actions .btn { width: 100%; justify-content: center; }
+  .compare-grid { grid-template-columns: 1fr; }
+  #toasts { right: 12px; left: 12px; bottom: 12px; }
+  .toast { max-width: none; }
   .board { grid-template-columns: repeat(5, minmax(160px,1fr)); }
   .formgrid { grid-template-columns: 1fr; }
   .formgrid .wide { grid-column: 1; }
